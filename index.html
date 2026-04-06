@@ -4,8 +4,119 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my-booklist</title>
+    <title>MyBookList | Manage Your Library</title>
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+
     <script defer type="module" src="/src/main.ts"></script>
   </head>
-  <body></body>
+  <body style="background-color: #fbfbfb">
+    <main class="container mt-5">
+      <header class="text-center mb-5">
+        <h1 class="display-4">
+          <i class="fas fa-book-open text-primary me-2" aria-hidden="true"></i>
+          My<span class="text-primary">Book</span>List
+        </h1>
+        <p class="lead text-muted">
+          Keep track of your personal library effortlessly.
+        </p>
+      </header>
+
+      <div class="row justify-content-center">
+        <section class="col-lg-6 col-md-8" aria-labelledby="form-title">
+          <div class="card shadow-2-strong">
+            <div class="card-body p-4">
+              <h2 id="form-title" class="h5 mb-4 text-center">Add New Book</h2>
+              <form id="book-form" autocomplete="off">
+                <div class="form-outline mb-4" data-mdb-input-init>
+                  <input type="text" id="title" class="form-control" required />
+                  <label class="form-label" for="title">Title</label>
+                </div>
+
+                <div class="form-outline mb-4" data-mdb-input-init>
+                  <input
+                    type="text"
+                    id="author"
+                    class="form-control"
+                    required
+                  />
+                  <label class="form-label" for="author">Author</label>
+                </div>
+
+                <div class="form-outline mb-4" data-mdb-input-init>
+                  <input type="text" id="isbn" class="form-control" required />
+                  <label class="form-label" for="isbn">ISBN#</label>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block mb-2 shadow-0"
+                >
+                  Add Book
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="row mb-4 mt-5 g-3">
+        <div class="col-md-8">
+          <div class="form-outline" data-mdb-input-init>
+            <input type="text" id="search-input" class="form-control" />
+            <label class="form-label" for="search-input">Search books...</label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <select id="sort-select" class="form-select" style="height: 38px">
+            <option value="title">Sort by Title</option>
+            <option value="author">Sort by Author</option>
+          </select>
+        </div>
+      </div>
+
+      <section class="mt-5 pb-5" aria-labelledby="list-title">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 id="list-title" class="h4 m-0">Stored Books</h2>
+          <span class="badge badge-primary rounded-pill" id="book-count"></span>
+        </div>
+
+        <div class="table-responsive bg-white rounded shadow-2">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-primary">
+              <tr>
+                <th scope="col" class="py-3 px-4 fw-bold">Title</th>
+                <th scope="col" class="py-3 fw-bold">Author</th>
+                <th scope="col" class="py-3 fw-bold">ISBN#</th>
+                <th scope="col" class="py-3 text-center fw-bold">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="book-list"></tbody>
+          </table>
+        </div>
+
+        <nav aria-label="Page navigation" class="mt-4">
+          <ul
+            class="pagination pagination-circle justify-content-center"
+            id="pagination-controls"
+          ></ul>
+        </nav>
+
+        <div id="empty-msg" class="text-center mt-4 d-none">
+          <p class="text-muted fst-italic">
+            No books added yet. Start your collection above!
+          </p>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
