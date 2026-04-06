@@ -12,3 +12,10 @@ export interface PaginatedResult {
 }
 
 export type SortKey = 'title' | 'author' | 'isbn';
+
+export interface AppState {
+  query: string;
+  sortBy: SortKey;
+  currentPage: number;
+  pageSize: number;
+}

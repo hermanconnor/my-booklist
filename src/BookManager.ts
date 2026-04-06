@@ -29,9 +29,9 @@ export class BookManager {
     page: number = 1,
     pageSize: number = 5,
   ): PaginatedResult {
-    // 1. Filter based on search query
     const lowerQuery = query.toLowerCase();
 
+    // 1. Filter - logic remains solid
     let filtered = this.books.filter((book) => {
       const searchContent =
         `${book.author} ${book.title} ${book.isbn}`.toLowerCase();
@@ -39,23 +39,19 @@ export class BookManager {
       return searchContent.includes(lowerQuery);
     });
 
-    // 2. Sort the filtered results
-    filtered.sort((a, b) => {
-      const valA = a[sortBy].toLowerCase();
-      const valB = b[sortBy].toLowerCase();
+    const sorted = [...filtered].sort((a, b) => {
+      const valA = String(a[sortBy] || '').toLowerCase();
+      const valB = String(b[sortBy] || '').toLowerCase();
 
       return valA.localeCompare(valB);
     });
 
-    // 3. Calculate Pagination
-    const totalItems = filtered.length;
+    const totalItems = sorted.length;
     const totalPages = Math.max(1, Math.ceil(totalItems / pageSize));
-
-    // Ensure current page doesn't exceed total pages if list shrinks
     const safePage = Math.min(page, totalPages);
     const startIndex = (safePage - 1) * pageSize;
 
-    const paginatedData = filtered.slice(startIndex, startIndex + pageSize);
+    const paginatedData = sorted.slice(startIndex, startIndex + pageSize);
 
     return {
       data: paginatedData,
