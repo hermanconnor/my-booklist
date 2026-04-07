@@ -1,5 +1,9 @@
 import 'mdb-ui-kit/css/mdb.min.css';
 import './style.css';
+import { App } from './App';
 
-import { Input, initMDB } from 'mdb-ui-kit';
-initMDB({ Input });
+const app = new App();
+
+document.addEventListener('DOMContentLoaded', () => {
+  app.init();
+});

@@ -77,7 +77,6 @@ export class Renderer {
     div.setAttribute('role', 'alert');
     div.style.zIndex = '9999';
 
-    // 1. Define the internal HTML
     // Removed data-bs-dismiss and added 'close-alert-btn' class for selection
     div.innerHTML = `
     <i class="fas ${this.getIcon(type)} me-2"></i>
@@ -87,18 +86,18 @@ export class Renderer {
 
     document.body.appendChild(div);
 
-    // 2. Manual Close Logic Function
+    // Manual Close Logic Function
     const removeAlert = () => {
       div.classList.remove('show');
       // Wait for the CSS transition (300ms) before removing from DOM
       setTimeout(() => div.remove(), 300);
     };
 
-    // 3. Attach listener to the "X" button
+    // Attach listener to the "X" button
     const closeBtn = div.querySelector('.close-alert-btn');
     closeBtn?.addEventListener('click', removeAlert);
 
-    // 4. Existing Auto-remove logic (3 seconds)
+    // Existing Auto-remove logic (3 seconds)
     setTimeout(removeAlert, 3000);
   }
 

@@ -11,7 +11,11 @@ export class StorageService {
       const parsed = JSON.parse(data);
 
       if (Array.isArray(parsed)) {
-        return parsed.filter((item) => item.title && item.isbn);
+        // Ensure we only return objects that look like Books
+        return parsed.filter(
+          (item): item is Book =>
+            !!(item && typeof item === 'object' && item.title && item.isbn),
+        );
       }
 
       return [];
