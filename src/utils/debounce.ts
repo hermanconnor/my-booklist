@@ -1,10 +1,10 @@
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: any[]) => void>(
   fn: T,
   delay: number,
 ) {
   let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: ThisParameterType<T>, ...args: Parameters<T>): void {
     const context = this;
 
     if (timeoutId) {

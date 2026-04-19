@@ -31,7 +31,6 @@ export class BookManager {
   ): PaginatedResult {
     const lowerQuery = query.toLowerCase();
 
-    // 1. Filter - logic remains solid
     let filtered = this.books.filter((book) => {
       const searchContent =
         `${book.author} ${book.title} ${book.isbn}`.toLowerCase();
